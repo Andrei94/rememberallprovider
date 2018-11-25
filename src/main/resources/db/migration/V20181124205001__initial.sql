@@ -1,8 +1,7 @@
-create table `rememberall`.`remark`
+create table remark
 (
-  `idremark`    int         not null default 0,
+  `idremark`    int         not null auto_increment,
   `description` mediumtext  not null,
   `quality`     varchar(45) not null,
   primary key (`idremark`)
-)
-  default character set = utf8;
+);
