@@ -1,0 +1,30 @@
+version: "3.1"
+
+services:
+  core:
+    build:
+      context: ./
+      dockerfile: Dockerfile
+    ports:
+      - 8080:8080
+    depends_on:
+      - rememberall-mysql-test
+      - rememberall-mysql-prod
+
+  rememberall-mysql-test:
+    image: mysql:latest
+    container_name: rememberall-test
+    ports:
+      - 6603:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: Pgg7_x3SHn}Gr@Mf
+      MYSQL_DATABASE: rememberalltest
+
+  rememberall-mysql-prod:
+    image: mysql:latest
+    container_name: rememberall-prod
+    ports:
+      - 6604:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: Pgg7_x3SHn}Gr@Mf
+      MYSQL_DATABASE: rememberall
