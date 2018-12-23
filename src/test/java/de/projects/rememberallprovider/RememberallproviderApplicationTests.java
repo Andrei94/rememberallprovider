@@ -13,7 +13,7 @@ import org.springframework.test.context.ActiveProfiles;
 import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
-@ActiveProfiles(profiles = "local")
+@ActiveProfiles(profiles = "localTest")
 class RememberallproviderApplicationTests {
 	@LocalServerPort
 	private int port;
@@ -47,7 +47,7 @@ class RememberallproviderApplicationTests {
 		return new Remark(description, quality);
 	}
 
-	private ResponseEntity<ResponseEntity> postRemark(Remark remark) {
+	private ResponseEntity<ResponseEntity> postRemark(Remark... remark) {
 		return restTemplate.postForEntity("http://localhost:" + port + "/remarks", remark, ResponseEntity.class);
 	}
 
