@@ -47,6 +47,8 @@ task passwordReplacer(type: Exec) {
     commandLine 'python', 'passwordReplacer.py'
 }
 
-processResources.doLast {
-    tasks.passwordReplacer.execute()
+processResources << {
+    passwordReplacer.execute()
 }
+
+passwordReplacer.onlyIf { !project.hasProperty('skipPasswordReplacer') }
