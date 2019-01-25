@@ -8,10 +8,10 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
-public class Controller {
+public class RemarksController {
 	private final RemarkRepository repository;
 
-	public Controller(RemarkRepository repository) {
+	public RemarksController(RemarkRepository repository) {
 		this.repository = repository;
 	}
 

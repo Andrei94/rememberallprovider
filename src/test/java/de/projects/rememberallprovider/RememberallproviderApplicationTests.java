@@ -3,9 +3,12 @@ package de.projects.rememberallprovider;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.web.server.LocalServerPort;
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.ActiveProfiles;
@@ -21,6 +24,7 @@ class RememberallproviderApplicationTests {
 	@Autowired
 	private RemarkRepository repository;
 	@Autowired
+	@Qualifier(value = "templateWithAuthentication")
 	private TestRestTemplate restTemplate;
 
 	@BeforeEach
@@ -54,5 +58,14 @@ class RememberallproviderApplicationTests {
 	private RemarksList getRemarksList() {
 		return restTemplate.getForEntity("http://localhost:" + port + "/allRemarks",
 				RemarksList.class).getBody();
+	}
+}
+
+@Configuration
+@ActiveProfiles(profiles = "localTest")
+class CustomTestRestTemplate {
+	@Bean
+	TestRestTemplate templateWithAuthentication() {
+		return new TestRestTemplate().withBasicAuth("user", "password");
 	}
 }
