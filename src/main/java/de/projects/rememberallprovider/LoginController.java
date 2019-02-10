@@ -7,10 +7,13 @@ import org.springframework.web.bind.annotation.*;
 import java.security.Principal;
 
 @RestController
-@CrossOrigin(origins = "*")
 public class LoginController {
+    final private UserDetailsService userDetailsService;
+
     @Autowired
-    UserDetailsService userDetailsService;
+    public LoginController(UserDetailsService userDetailsService) {
+        this.userDetailsService = userDetailsService;
+    }
 
     @PostMapping("/login")
     public boolean login(@RequestBody User user) {
@@ -22,4 +25,3 @@ public class LoginController {
         return user;
     }
 }
-

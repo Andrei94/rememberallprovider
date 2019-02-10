@@ -22,7 +22,6 @@ public class RemarksController {
 	}
 
 	@GetMapping("/allRemarks")
-	@CrossOrigin(origins = {"http://localhost:4200", "null", "http://rememberall.s3-website-us-east-1.amazonaws.com"})
 	public ResponseEntity<RemarksList> getAllRemarks() {
 		return ResponseEntity.of(Optional.of(new RemarksList(repository.findAll().stream()
 				.map(entity -> new Remark(entity.getDescription(), entity.getQuality())).collect(Collectors.toList()))));
